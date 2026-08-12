@@ -15,6 +15,7 @@ import {
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as Notifications from "expo-notifications";
 import * as Haptics from "expo-haptics";
+import SteadyTimerNotification from "steady-timer-notification";
 import {
   Plus,
   Minus,
@@ -660,6 +661,12 @@ export default function App() {
 
       await Notifications.dismissAllNotificationsAsync();
     } catch (e) {}
+
+    if (Platform.OS === "android") {
+      try {
+        await SteadyTimerNotification?.dismissAsync();
+      } catch (e) {}
+    }
   };
 
   const scheduleTimerNotifications = async (
@@ -694,20 +701,23 @@ export default function App() {
         });
       }
 
-      await Notifications.scheduleNotificationAsync({
-        content: {
-          title: secondsRemaining > 0 ? "Pouch Timer Active ⏱️" : "Pouch Timer Overdue ⏱️",
-          body:
-            secondsRemaining > 0
-              ? `Timer set for ${durationMinutes} min limit.`
-              : `Past your ${durationMinutes} min limit — time to take your pouch out.`,
-          sticky: true,
-          autoDismiss: false,
-          priority: Notifications.AndroidNotificationPriority.LOW,
-          channelId: "timer-progress",
-        },
-        trigger: null,
-      });
+      if (Platform.OS === "android" && secondsRemaining > 0) {
+        await SteadyTimerNotification?.showCountdownAsync(
+          startTime + totalSeconds * 1000,
+          durationMinutes
+        );
+      } else if (Platform.OS !== "android") {
+        await Notifications.scheduleNotificationAsync({
+          content: {
+            title: secondsRemaining > 0 ? "Pouch Timer Active ⏱️" : "Pouch Timer Overdue ⏱️",
+            body:
+              secondsRemaining > 0
+                ? `Timer set for ${durationMinutes} min limit.`
+                : `Past your ${durationMinutes} min limit — time to take your pouch out.`,
+          },
+          trigger: null,
+        });
+      }
     } catch (e) {}
   };
 
@@ -885,14 +895,14 @@ export default function App() {
         {/* Timer Card */}
         {timerStart === null ? (
           <View style={[styles.card, styles.cardWhite]}>
-            <View style={styles.rowBetween}>
-              <View style={styles.rowGap}>
+            <View style={[styles.rowBetween, styles.timerIdleRow]}>
+              <View style={[styles.rowGap, styles.timerIdleStatus]}>
                 <TimerIcon size={15} color={C.textFaint} />
 
                 <Text style={styles.subtext}>No pouch in right now</Text>
               </View>
 
-              <View style={styles.rowGap}>
+              <View style={[styles.rowGap, styles.timerIdleActions]}>
                 <TouchableOpacity onPress={() => startTimer(false)}>
                   <Text style={styles.linkText}>time it</Text>
                 </TouchableOpacity>
@@ -1574,6 +1584,18 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginTop: 12,
     gap: 8,
+  },
+
+  timerIdleRow: {
+    columnGap: 22,
+  },
+
+  timerIdleStatus: {
+    flex: 1,
+  },
+
+  timerIdleActions: {
+    flexShrink: 0,
   },
 
   alignCenter: {

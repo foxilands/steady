@@ -58,7 +58,7 @@ The project is configured for Expo EAS builds. The current preview app profile i
 
 ## Repository Notes
 
-This repo is the public project source for Steady and is synced with the build-ready version of the app.
+This repo is the working local project copy for Steady and is synced with the current internal build-ready version of the app.
 
 ## v1 Changelog
 
@@ -80,12 +80,12 @@ This repo is the public project source for Steady and is synced with the build-r
 - startup reference error caused by stale statusBarInset usage
 - Android build compatibility issues affecting app launch
 
-## Release Checklist
+## Internal Release Checklist
 
 - [x] app configured for Expo/EAS
 - [x] Android preview build verified
 - [x] dependency health check passed
-- [x] repo synced to GitHub
+- [x] repo synced to local Git history
 - [x] local-only security posture reviewed
 
 ## Future Improvements

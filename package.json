@@ -8,18 +8,18 @@
     "web": "expo start --web"
   },
   "dependencies": {
-    "@expo/vector-icons": "14.1.0",
-    "@react-native-async-storage/async-storage": "2.1.2",
-    "expo": "53.0.27",
-    "expo-asset": "~11.1.7",
-    "expo-font": "13.3.2",
-    "expo-status-bar": "2.2.3",
+    "@expo/vector-icons": "^15.0.2",
+    "@react-native-async-storage/async-storage": "2.2.0",
+    "expo": "^57.0.12",
+    "expo-asset": "~57.0.10",
+    "expo-font": "~57.0.1",
+    "expo-status-bar": "~57.0.1",
     "lucide-react-native": "*",
-    "react": "19.0.0",
-    "react-native": "0.79.6",
+    "react": "19.2.3",
+    "react-native": "0.86.2",
     "react-native-paper": "5.0.1",
-    "react-native-safe-area-context": "5.4.0",
-    "react-native-svg": "15.11.2"
+    "react-native-safe-area-context": "~5.7.0",
+    "react-native-svg": "15.15.4"
   },
   "private": true,
   "allowScripts": true

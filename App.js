@@ -478,7 +478,7 @@ export default function App() {
 
         {/* Calendar Card */}
         <View style={[styles.card, styles.cardWhite, { padding: 0 }]}>
-          <TouchableOpacity onPress={() => setShowCalendar(!showCalendar)} style={styles.accordionHeader}>
+          <TouchableOpacity accessibilityLabel={showCalendar ? "Collapse calendar" : "Expand calendar"} onPress={() => setShowCalendar(!showCalendar)} style={styles.accordionHeader}>
             <View style={styles.rowGap}>
               <CalendarIcon size={16} color="#a8a29e" />
               <Text style={styles.cardTitle}>Calendar</Text>
@@ -521,6 +521,7 @@ export default function App() {
                 ) : (
                   <View style={styles.rowGap}>
                     <TouchableOpacity
+                      accessibilityLabel="Previous month"
                       onPress={() =>
                         setCalMonth((c) =>
                           c.month === 0 ? { year: c.year - 1, month: 11 } : { ...c, month: c.month - 1 }
@@ -531,6 +532,7 @@ export default function App() {
                     </TouchableOpacity>
                     <Text style={styles.calNavTitle}>{monthLabel(calMonth.year, calMonth.month)}</Text>
                     <TouchableOpacity
+                      accessibilityLabel="Next month"
                       onPress={() =>
                         setCalMonth((c) =>
                           c.month === 11 ? { year: c.year + 1, month: 0 } : { ...c, month: c.month + 1 }
@@ -587,11 +589,11 @@ export default function App() {
                 <View style={styles.selectedDayBar}>
                   <Text style={styles.subtext}>{selectedDay}</Text>
                   <View style={styles.rowGap}>
-                    <TouchableOpacity onPress={() => adjustDay(selectedDay, -1)} style={styles.btnSmallRound}>
+                    <TouchableOpacity accessibilityLabel="Decrease selected day count" onPress={() => adjustDay(selectedDay, -1)} style={styles.btnSmallRound}>
                       <Text style={styles.btnSmallText}>-</Text>
                     </TouchableOpacity>
                     <Text style={styles.boldText}>{log[selectedDay] || 0}</Text>
-                    <TouchableOpacity onPress={() => adjustDay(selectedDay, 1)} style={styles.btnSmallRoundBlue}>
+                    <TouchableOpacity accessibilityLabel="Increase selected day count" onPress={() => adjustDay(selectedDay, 1)} style={styles.btnSmallRoundBlue}>
                       <Text style={styles.btnSmallTextWhite}>+</Text>
                     </TouchableOpacity>
                   </View>
@@ -617,15 +619,15 @@ export default function App() {
               <View>
                 <Text style={styles.subtext}>Daily limit:</Text>
                 <View style={styles.editRow}>
-                  <TouchableOpacity style={styles.btnSmallRound} onPress={() => saveLimit(limit - 1)}>
+                  <TouchableOpacity accessibilityLabel="Decrease daily limit" style={styles.btnSmallRound} onPress={() => saveLimit(limit - 1)}>
                     <Text style={styles.btnSmallText}>−</Text>
                   </TouchableOpacity>
                   <Text style={styles.editValue}>{limit}</Text>
-                  <TouchableOpacity style={styles.btnSmallRoundBlue} onPress={() => saveLimit(limit + 1)}>
+                  <TouchableOpacity accessibilityLabel="Increase daily limit" style={styles.btnSmallRoundBlue} onPress={() => saveLimit(limit + 1)}>
                     <Text style={styles.btnSmallTextWhite}>+</Text>
                   </TouchableOpacity>
                 </View>
-                <TouchableOpacity onPress={() => setShowLimitEdit(false)} style={{ alignItems: "flex-end", marginTop: 12 }}>
+                <TouchableOpacity accessibilityLabel="Save daily limit" onPress={() => setShowLimitEdit(false)} style={{ alignItems: "flex-end", marginTop: 12 }}>
                   <Text style={styles.doneText}>Done</Text>
                 </TouchableOpacity>
               </View>
@@ -639,7 +641,7 @@ export default function App() {
                   <Text style={styles.boldText}>${canPrice.toFixed(2)}</Text> per can of{" "}
                   <Text style={styles.boldText}>{canSize}</Text>
                 </Text>
-                <TouchableOpacity onPress={() => setShowCostEdit(true)}>
+                <TouchableOpacity accessibilityLabel="Edit can cost and size" onPress={() => setShowCostEdit(true)}>
                   <Text style={styles.linkText}>tap to edit</Text>
                 </TouchableOpacity>
               </View>
@@ -663,7 +665,7 @@ export default function App() {
                     style={styles.inputStyle}
                   />
                 </View>
-                <TouchableOpacity onPress={() => setShowCostEdit(false)} style={{ alignItems: "flex-end" }}>
+                <TouchableOpacity accessibilityLabel="Save price and size settings" onPress={() => setShowCostEdit(false)} style={{ alignItems: "flex-end" }}>
                   <Text style={styles.doneText}>Done</Text>
                 </TouchableOpacity>
               </View>
@@ -679,7 +681,7 @@ export default function App() {
                     Timer flags at <Text style={styles.boldText}>{timerLimit} min</Text>
                   </Text>
                 </View>
-                <TouchableOpacity onPress={() => setShowTimerEdit(true)}>
+                <TouchableOpacity accessibilityLabel="Edit timer threshold" onPress={() => setShowTimerEdit(true)}>
                   <Text style={styles.linkText}>tap to edit</Text>
                 </TouchableOpacity>
               </View>
@@ -688,6 +690,7 @@ export default function App() {
                 <Text style={styles.subtext}>How long before it flags?</Text>
                 <View style={styles.editRow}> 
                   <TouchableOpacity
+                    accessibilityLabel="Decrease timer threshold"
                     style={styles.btnSmallRound}
                     onPress={() => saveTimerLimit(timerLimit - 5)}
                   >
@@ -695,13 +698,14 @@ export default function App() {
                   </TouchableOpacity>
                   <Text style={styles.editValue}>{timerLimit} min</Text>
                   <TouchableOpacity
+                    accessibilityLabel="Increase timer threshold"
                     style={styles.btnSmallRoundBlue}
                     onPress={() => saveTimerLimit(timerLimit + 5)}
                   >
                     <Text style={styles.btnSmallTextWhite}>+</Text>
                   </TouchableOpacity>
                 </View>
-                <TouchableOpacity onPress={() => setShowTimerEdit(false)} style={{ alignItems: "flex-end", marginTop: 12 }}>
+                <TouchableOpacity accessibilityLabel="Save timer settings" onPress={() => setShowTimerEdit(false)} style={{ alignItems: "flex-end", marginTop: 12 }}>
                   <Text style={styles.doneText}>Done</Text>
                 </TouchableOpacity>
               </View>
@@ -783,8 +787,8 @@ const styles = StyleSheet.create({
   dayChipText: { fontSize: 12, fontWeight: "700", color: C.text },
   dayChipCount: { fontSize: 9, color: C.textDim, marginTop: 2 },
   selectedDayBar: { flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginTop: 14, paddingTop: 14, borderTopWidth: 1, borderTopColor: C.border },
-  btnSmallRound: { width: 28, height: 28, borderRadius: 14, backgroundColor: C.chip, justifyContent: "center", alignItems: "center" },
-  btnSmallRoundBlue: { width: 28, height: 28, borderRadius: 14, backgroundColor: C.accent, justifyContent: "center", alignItems: "center" },
+  btnSmallRound: { width: 44, height: 44, borderRadius: 22, backgroundColor: C.chip, justifyContent: "center", alignItems: "center" },
+  btnSmallRoundBlue: { width: 44, height: 44, borderRadius: 22, backgroundColor: C.accent, justifyContent: "center", alignItems: "center" },
   btnSmallText: { color: C.text, fontWeight: "700" },
   btnSmallTextWhite: { color: C.bg, fontWeight: "700" },
   editRow: { flexDirection: "row", alignItems: "center", justifyContent: "center", gap: 16, marginTop: 12 },

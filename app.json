@@ -1,0 +1,29 @@
+{
+  "expo": {
+    "name": "Steady",
+    "slug": "snack-e9f63de9-2de8-436d-85ce-b96e0b0d4764",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "package": "com.foxilandss.steadygeminitest",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      }
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "description": "Steady is a simple daily pouch tracker for staying aware of your limit, spending, and timer habits.",
+    "extra": {
+      "eas": {
+        "projectId": "d91700a7-1102-4498-9599-23682f9bd435"
+      }
+    }
+  }
+}

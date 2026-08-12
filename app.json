@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "Steady",
-    "slug": "snack-e9f63de9-2de8-436d-85ce-b96e0b0d4764",
+    "slug": "steady",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -27,3 +27,4 @@
     }
   }
 }
+

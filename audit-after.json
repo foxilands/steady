@@ -5,35 +5,20 @@
       "name": "@expo/cli",
       "severity": "high",
       "isDirect": false,
-      "via": [
-        "@expo/metro",
-        "@expo/metro-config"
-      ],
+      "via": ["@expo/metro", "@expo/metro-config"],
       "effects": [],
       "range": ">=0.25.0-canary-20250612-338ef55",
-      "nodes": [
-        "node_modules/expo/node_modules/@expo/cli"
-      ],
+      "nodes": ["node_modules/expo/node_modules/@expo/cli"],
       "fixAvailable": true
     },
     "@expo/metro": {
       "name": "@expo/metro",
       "severity": "high",
       "isDirect": false,
-      "via": [
-        "metro",
-        "metro-config",
-        "metro-transform-worker"
-      ],
-      "effects": [
-        "@expo/cli",
-        "@expo/metro-config",
-        "expo"
-      ],
+      "via": ["metro", "metro-config", "metro-transform-worker"],
+      "effects": ["@expo/cli", "@expo/metro-config", "expo"],
       "range": "*",
-      "nodes": [
-        "node_modules/@expo/metro"
-      ],
+      "nodes": ["node_modules/@expo/metro"],
       "fixAvailable": {
         "name": "expo",
         "version": "53.0.27",
@@ -44,16 +29,10 @@
       "name": "@expo/metro-config",
       "severity": "high",
       "isDirect": false,
-      "via": [
-        "@expo/metro"
-      ],
-      "effects": [
-        "expo"
-      ],
+      "via": ["@expo/metro"],
+      "effects": ["expo"],
       "range": ">=0.21.0-canary-20250630-547cd82",
-      "nodes": [
-        "node_modules/@expo/metro-config"
-      ],
+      "nodes": ["node_modules/@expo/metro-config"],
       "fixAvailable": {
         "name": "expo",
         "version": "53.0.27",
@@ -64,16 +43,10 @@
       "name": "@react-native/community-cli-plugin",
       "severity": "high",
       "isDirect": false,
-      "via": [
-        "metro"
-      ],
-      "effects": [
-        "react-native"
-      ],
+      "via": ["metro"],
+      "effects": ["react-native"],
       "range": "*",
-      "nodes": [
-        "node_modules/@react-native/community-cli-plugin"
-      ],
+      "nodes": ["node_modules/@react-native/community-cli-plugin"],
       "fixAvailable": {
         "name": "react-native",
         "version": "0.72.17",
@@ -84,16 +57,10 @@
       "name": "@react-native/virtualized-lists",
       "severity": "high",
       "isDirect": false,
-      "via": [
-        "react-native"
-      ],
-      "effects": [
-        "react-native"
-      ],
+      "via": ["react-native"],
+      "effects": ["react-native"],
       "range": ">=0.85.0-nightly-20260108-1236b6be4",
-      "nodes": [
-        "node_modules/@react-native/virtualized-lists"
-      ],
+      "nodes": ["node_modules/@react-native/virtualized-lists"],
       "fixAvailable": {
         "name": "react-native",
         "version": "0.72.17",
@@ -104,16 +71,10 @@
       "name": "expo",
       "severity": "high",
       "isDirect": true,
-      "via": [
-        "@expo/cli",
-        "@expo/metro",
-        "@expo/metro-config"
-      ],
+      "via": ["@expo/cli", "@expo/metro", "@expo/metro-config"],
       "effects": [],
       "range": "52.0.0-canary-20240625-2333e70 - 52.0.0-canary-20241018-f71b3e0 || >=54.0.0-canary-20250611-f0afe80",
-      "nodes": [
-        "node_modules/expo"
-      ],
+      "nodes": ["node_modules/expo"],
       "fixAvailable": {
         "name": "expo",
         "version": "53.0.27",
@@ -132,9 +93,7 @@
           "title": "image-size: ICNS parser allows denial of service through an infinite loop",
           "url": "https://github.com/advisories/GHSA-w3rx-r6r6-pgpr",
           "severity": "high",
-          "cwe": [
-            "CWE-835"
-          ],
+          "cwe": ["CWE-835"],
           "cvss": {
             "score": 7.5,
             "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
@@ -148,9 +107,7 @@
           "title": "image-size: JXL and HEIF parsers allow denial of service through infinite loops",
           "url": "https://github.com/advisories/GHSA-5p2g-fcmc-qvqq",
           "severity": "high",
-          "cwe": [
-            "CWE-835"
-          ],
+          "cwe": ["CWE-835"],
           "cvss": {
             "score": 7.5,
             "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
@@ -158,13 +115,9 @@
           "range": "<=2.0.2"
         }
       ],
-      "effects": [
-        "metro"
-      ],
+      "effects": ["metro"],
       "range": "*",
-      "nodes": [
-        "node_modules/image-size"
-      ],
+      "nodes": ["node_modules/image-size"],
       "fixAvailable": {
         "name": "expo",
         "version": "53.0.27",
@@ -175,11 +128,7 @@
       "name": "metro",
       "severity": "high",
       "isDirect": false,
-      "via": [
-        "image-size",
-        "metro-config",
-        "metro-transform-worker"
-      ],
+      "via": ["image-size", "metro-config", "metro-transform-worker"],
       "effects": [
         "@expo/metro",
         "@react-native/community-cli-plugin",
@@ -201,12 +150,8 @@
       "name": "metro-config",
       "severity": "high",
       "isDirect": false,
-      "via": [
-        "metro"
-      ],
-      "effects": [
-        "metro"
-      ],
+      "via": ["metro"],
+      "effects": ["metro"],
       "range": "*",
       "nodes": [
         "node_modules/@react-native/community-cli-plugin/node_modules/metro-config",
@@ -222,12 +167,8 @@
       "name": "metro-transform-worker",
       "severity": "high",
       "isDirect": false,
-      "via": [
-        "metro"
-      ],
-      "effects": [
-        "metro"
-      ],
+      "via": ["metro"],
+      "effects": ["metro"],
       "range": ">=0.60.0",
       "nodes": [
         "node_modules/@react-native/community-cli-plugin/node_modules/metro-transform-worker",
@@ -243,17 +184,10 @@
       "name": "react-native",
       "severity": "high",
       "isDirect": true,
-      "via": [
-        "@react-native/community-cli-plugin",
-        "@react-native/virtualized-lists"
-      ],
-      "effects": [
-        "@react-native/virtualized-lists"
-      ],
+      "via": ["@react-native/community-cli-plugin", "@react-native/virtualized-lists"],
+      "effects": ["@react-native/virtualized-lists"],
       "range": ">=0.73.0-nightly-20230506-1af868c52",
-      "nodes": [
-        "node_modules/react-native"
-      ],
+      "nodes": ["node_modules/react-native"],
       "fixAvailable": {
         "name": "react-native",
         "version": "0.72.17",

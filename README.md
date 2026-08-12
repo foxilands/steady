@@ -63,6 +63,7 @@ This repo is the working local project copy for Steady and is synced with the cu
 ## v1 Changelog
 
 ### Added
+
 - daily pouch tracking and limit comparison
 - cost estimation based on can size and price
 - timer tracking for in-use reminder workflow
@@ -70,12 +71,14 @@ This repo is the working local project copy for Steady and is synced with the cu
 - local-only persistence with AsyncStorage
 
 ### Improved
+
 - cleaned up the Android startup render flow for stability
 - removed incompatible layout assumptions affecting app launch
 - fixed missing Expo native dependency issues during runtime
 - aligned the Expo app configuration for a stable preview build
 
 ### Fixed
+
 - runtime crash caused by missing ExpoAsset module
 - startup reference error caused by stale statusBarInset usage
 - Android build compatibility issues affecting app launch

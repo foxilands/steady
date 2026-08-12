@@ -2,20 +2,32 @@
   "expo": {
     "name": "Steady",
     "slug": "steady",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.foxilands.steady",
+      "buildNumber": "2"
     },
     "android": {
       "package": "com.foxilands.steady",
+      "versionCode": 2,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       }
     },
+    "plugins": [
+      [
+        "expo-notifications",
+        {
+          "icon": "./assets/icon.png",
+          "color": "#22b8cf"
+        }
+      ]
+    ],
     "web": {
       "favicon": "./assets/favicon.png"
     },

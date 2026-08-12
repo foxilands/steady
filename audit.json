@@ -15,27 +15,17 @@
       ],
       "effects": [],
       "range": "<=0.0.0-canary-20231123-1b19f96-4 || >=0.0.1-canary-20231125-d600e44",
-      "nodes": [
-        "node_modules/expo/node_modules/@expo/cli"
-      ],
+      "nodes": ["node_modules/expo/node_modules/@expo/cli"],
       "fixAvailable": true
     },
     "@expo/config": {
       "name": "@expo/config",
       "severity": "moderate",
       "isDirect": false,
-      "via": [
-        "@expo/config-plugins"
-      ],
-      "effects": [
-        "@expo/local-build-cache-provider",
-        "@expo/metro-config",
-        "expo"
-      ],
+      "via": ["@expo/config-plugins"],
+      "effects": ["@expo/local-build-cache-provider", "@expo/metro-config", "expo"],
       "range": "<=0.0.1-canary-20240418-8d74597 || >=3.3.23-alpha.0",
-      "nodes": [
-        "node_modules/@expo/config"
-      ],
+      "nodes": ["node_modules/@expo/config"],
       "fixAvailable": {
         "name": "expo",
         "version": "53.0.27",
@@ -46,9 +36,7 @@
       "name": "@expo/config-plugins",
       "severity": "moderate",
       "isDirect": false,
-      "via": [
-        "xcode"
-      ],
+      "via": ["xcode"],
       "effects": [
         "@expo/cli",
         "@expo/config",
@@ -57,9 +45,7 @@
         "expo"
       ],
       "range": "*",
-      "nodes": [
-        "node_modules/@expo/config-plugins"
-      ],
+      "nodes": ["node_modules/@expo/config-plugins"],
       "fixAvailable": {
         "name": "expo",
         "version": "53.0.27",
@@ -70,32 +56,20 @@
       "name": "@expo/inline-modules",
       "severity": "moderate",
       "isDirect": false,
-      "via": [
-        "@expo/config-plugins"
-      ],
-      "effects": [
-        "@expo/cli"
-      ],
+      "via": ["@expo/config-plugins"],
+      "effects": ["@expo/cli"],
       "range": ">=0.0.2-canary-20260409-6fc2991",
-      "nodes": [
-        "node_modules/@expo/inline-modules"
-      ],
+      "nodes": ["node_modules/@expo/inline-modules"],
       "fixAvailable": true
     },
     "@expo/local-build-cache-provider": {
       "name": "@expo/local-build-cache-provider",
       "severity": "moderate",
       "isDirect": false,
-      "via": [
-        "@expo/config"
-      ],
-      "effects": [
-        "expo"
-      ],
+      "via": ["@expo/config"],
+      "effects": ["expo"],
       "range": "*",
-      "nodes": [
-        "node_modules/@expo/local-build-cache-provider"
-      ],
+      "nodes": ["node_modules/@expo/local-build-cache-provider"],
       "fixAvailable": {
         "name": "expo",
         "version": "53.0.27",
@@ -106,20 +80,10 @@
       "name": "@expo/metro",
       "severity": "high",
       "isDirect": false,
-      "via": [
-        "metro",
-        "metro-config",
-        "metro-transform-worker"
-      ],
-      "effects": [
-        "@expo/cli",
-        "@expo/metro-config",
-        "expo"
-      ],
+      "via": ["metro", "metro-config", "metro-transform-worker"],
+      "effects": ["@expo/cli", "@expo/metro-config", "expo"],
       "range": "*",
-      "nodes": [
-        "node_modules/@expo/metro"
-      ],
+      "nodes": ["node_modules/@expo/metro"],
       "fixAvailable": {
         "name": "expo",
         "version": "53.0.27",
@@ -130,17 +94,10 @@
       "name": "@expo/metro-config",
       "severity": "high",
       "isDirect": false,
-      "via": [
-        "@expo/config",
-        "@expo/metro"
-      ],
-      "effects": [
-        "expo"
-      ],
+      "via": ["@expo/config", "@expo/metro"],
+      "effects": ["expo"],
       "range": "<=0.0.1-canary-20240418-8d74597 || >=0.1.49-alpha.0",
-      "nodes": [
-        "node_modules/@expo/metro-config"
-      ],
+      "nodes": ["node_modules/@expo/metro-config"],
       "fixAvailable": {
         "name": "expo",
         "version": "53.0.27",
@@ -151,31 +108,20 @@
       "name": "@expo/prebuild-config",
       "severity": "moderate",
       "isDirect": false,
-      "via": [
-        "@expo/config",
-        "@expo/config-plugins"
-      ],
+      "via": ["@expo/config", "@expo/config-plugins"],
       "effects": [],
       "range": "*",
-      "nodes": [
-        "node_modules/@expo/prebuild-config"
-      ],
+      "nodes": ["node_modules/@expo/prebuild-config"],
       "fixAvailable": true
     },
     "@react-native/community-cli-plugin": {
       "name": "@react-native/community-cli-plugin",
       "severity": "high",
       "isDirect": false,
-      "via": [
-        "metro"
-      ],
-      "effects": [
-        "react-native"
-      ],
+      "via": ["metro"],
+      "effects": ["react-native"],
       "range": "*",
-      "nodes": [
-        "node_modules/@react-native/community-cli-plugin"
-      ],
+      "nodes": ["node_modules/@react-native/community-cli-plugin"],
       "fixAvailable": {
         "name": "react-native",
         "version": "0.72.17",
@@ -186,16 +132,10 @@
       "name": "@react-native/virtualized-lists",
       "severity": "high",
       "isDirect": false,
-      "via": [
-        "react-native"
-      ],
-      "effects": [
-        "react-native"
-      ],
+      "via": ["react-native"],
+      "effects": ["react-native"],
       "range": ">=0.85.0-nightly-20260108-1236b6be4",
-      "nodes": [
-        "node_modules/@react-native/virtualized-lists"
-      ],
+      "nodes": ["node_modules/@react-native/virtualized-lists"],
       "fixAvailable": {
         "name": "react-native",
         "version": "0.72.17",
@@ -216,9 +156,7 @@
       ],
       "effects": [],
       "range": "46.0.5 || >=47.0.0-alpha.1",
-      "nodes": [
-        "node_modules/expo"
-      ],
+      "nodes": ["node_modules/expo"],
       "fixAvailable": {
         "name": "expo",
         "version": "53.0.27",
@@ -237,9 +175,7 @@
           "title": "image-size: ICNS parser allows denial of service through an infinite loop",
           "url": "https://github.com/advisories/GHSA-w3rx-r6r6-pgpr",
           "severity": "high",
-          "cwe": [
-            "CWE-835"
-          ],
+          "cwe": ["CWE-835"],
           "cvss": {
             "score": 7.5,
             "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
@@ -253,9 +189,7 @@
           "title": "image-size: JXL and HEIF parsers allow denial of service through infinite loops",
           "url": "https://github.com/advisories/GHSA-5p2g-fcmc-qvqq",
           "severity": "high",
-          "cwe": [
-            "CWE-835"
-          ],
+          "cwe": ["CWE-835"],
           "cvss": {
             "score": 7.5,
             "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
@@ -263,13 +197,9 @@
           "range": "<=2.0.2"
         }
       ],
-      "effects": [
-        "metro"
-      ],
+      "effects": ["metro"],
       "range": "*",
-      "nodes": [
-        "node_modules/image-size"
-      ],
+      "nodes": ["node_modules/image-size"],
       "fixAvailable": {
         "name": "react-native",
         "version": "0.72.17",
@@ -280,11 +210,7 @@
       "name": "metro",
       "severity": "high",
       "isDirect": false,
-      "via": [
-        "image-size",
-        "metro-config",
-        "metro-transform-worker"
-      ],
+      "via": ["image-size", "metro-config", "metro-transform-worker"],
       "effects": [
         "@expo/metro",
         "@react-native/community-cli-plugin",
@@ -306,12 +232,8 @@
       "name": "metro-config",
       "severity": "high",
       "isDirect": false,
-      "via": [
-        "metro"
-      ],
-      "effects": [
-        "metro"
-      ],
+      "via": ["metro"],
+      "effects": ["metro"],
       "range": "*",
       "nodes": [
         "node_modules/@react-native/community-cli-plugin/node_modules/metro-config",
@@ -327,12 +249,8 @@
       "name": "metro-transform-worker",
       "severity": "high",
       "isDirect": false,
-      "via": [
-        "metro"
-      ],
-      "effects": [
-        "metro"
-      ],
+      "via": ["metro"],
+      "effects": ["metro"],
       "range": ">=0.60.0",
       "nodes": [
         "node_modules/@react-native/community-cli-plugin/node_modules/metro-transform-worker",
@@ -348,17 +266,10 @@
       "name": "react-native",
       "severity": "high",
       "isDirect": true,
-      "via": [
-        "@react-native/community-cli-plugin",
-        "@react-native/virtualized-lists"
-      ],
-      "effects": [
-        "@react-native/virtualized-lists"
-      ],
+      "via": ["@react-native/community-cli-plugin", "@react-native/virtualized-lists"],
+      "effects": ["@react-native/virtualized-lists"],
       "range": ">=0.73.0-nightly-20230506-1af868c52",
-      "nodes": [
-        "node_modules/react-native"
-      ],
+      "nodes": ["node_modules/react-native"],
       "fixAvailable": {
         "name": "react-native",
         "version": "0.72.17",
@@ -377,10 +288,7 @@
           "title": "uuid: Missing buffer bounds check in v3/v5/v6 when buf is provided",
           "url": "https://github.com/advisories/GHSA-w5hq-g745-h8pq",
           "severity": "moderate",
-          "cwe": [
-            "CWE-787",
-            "CWE-1285"
-          ],
+          "cwe": ["CWE-787", "CWE-1285"],
           "cvss": {
             "score": 7.5,
             "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:H/A:N"
@@ -388,13 +296,9 @@
           "range": "<11.1.1"
         }
       ],
-      "effects": [
-        "xcode"
-      ],
+      "effects": ["xcode"],
       "range": "<11.1.1",
-      "nodes": [
-        "node_modules/uuid"
-      ],
+      "nodes": ["node_modules/uuid"],
       "fixAvailable": {
         "name": "expo",
         "version": "53.0.27",
@@ -405,16 +309,10 @@
       "name": "xcode",
       "severity": "moderate",
       "isDirect": false,
-      "via": [
-        "uuid"
-      ],
-      "effects": [
-        "@expo/config-plugins"
-      ],
+      "via": ["uuid"],
+      "effects": ["@expo/config-plugins"],
       "range": ">=0.9.2",
-      "nodes": [
-        "node_modules/xcode"
-      ],
+      "nodes": ["node_modules/xcode"],
       "fixAvailable": {
         "name": "expo",
         "version": "53.0.27",

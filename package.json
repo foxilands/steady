@@ -11,6 +11,7 @@
     "@expo/vector-icons": "14.1.0",
     "@react-native-async-storage/async-storage": "2.1.2",
     "expo": "53.0.27",
+    "expo-asset": "~11.1.7",
     "expo-font": "13.3.2",
     "expo-status-bar": "2.2.3",
     "lucide-react-native": "*",
@@ -21,5 +22,5 @@
     "react-native-svg": "15.11.2"
   },
   "private": true,
-  "allowScripts": "true"
+  "allowScripts": true
 }

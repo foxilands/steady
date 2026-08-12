@@ -627,7 +627,7 @@ export default function App() {
                 </TouchableOpacity>
               </View>
             ) : (
-              <View style={{ gap: 8 }}>
+              <View>
                 <View style={styles.rowBetween}>
                   <Text style={styles.subtext}>Price per can (MXN):</Text>
                   <TextInput
@@ -695,7 +695,7 @@ const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
     backgroundColor: "#fafaf9",
-    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight + 16 : 16,
+    paddingTop: statusBarInset + 16,
   },
   container: { paddingHorizontal: 16, paddingBottom: 24, maxWidth: 400, alignSelf: "center", width: "100%" },
   centerContainer: { flex: 1, justifyContent: "center", alignItems: "center", backgroundColor: "#fafaf9" },
@@ -710,15 +710,15 @@ const styles = StyleSheet.create({
   cardOver: { backgroundColor: "#fffbeb", borderColor: "#fcd34d" },
   cardAtLimit: { backgroundColor: "#f5f5f4", borderColor: "#d6d3d1" },
   rowBetween: { flexDirection: "row", justifyContent: "space-between", alignItems: "center" },
-  rowGap: { flexDirection: "row", alignItems: "center", gap: 8 },
-  rowCenterGap: { flexDirection: "row", justifyContent: "center", alignItems: "center", gap: 4, marginTop: 12 },
+  rowGap: { flexDirection: "row", alignItems: "center" },
+  rowCenterGap: { flexDirection: "row", justifyContent: "center", alignItems: "center", marginTop: 12 },
   alignCenter: { alignItems: "center" },
   subtext: { fontSize: 12, color: "#78716c" },
   subtextSmall: { fontSize: 11, color: "#a8a29e" },
   linkText: { fontSize: 12, color: "#a8a29e" },
   btnPrimary: { backgroundColor: "#3b82f6", borderRadius: 20, paddingHorizontal: 16, paddingVertical: 8 },
   btnPrimaryText: { color: "#ffffff", fontSize: 12, fontWeight: "600" },
-  btnSecondary: { backgroundColor: "#f5f5f4", borderRadius: 20, paddingHorizontal: 16, paddingVertical: 8, flexDirection: "row", alignItems: "center", gap: 6 },
+  btnSecondary: { backgroundColor: "#f5f5f4", borderRadius: 20, paddingHorizontal: 16, paddingVertical: 8, flexDirection: "row", alignItems: "center" },
   btnSecondaryText: { color: "#44403c", fontSize: 12, fontWeight: "600" },
   timerDigits: { fontSize: 32, fontWeight: "600", color: "#292524" },
   counterNumber: { fontSize: 60, fontWeight: "300", color: "#1c1917" },
@@ -726,8 +726,8 @@ const styles = StyleSheet.create({
   btnRoundSecondary: { width: 48, height: 48, borderRadius: 24, backgroundColor: "#f5f5f4", justifyContent: "center", alignItems: "center" },
   warningText: { fontSize: 12, color: "#b45309", textAlign: "center", marginTop: 12 },
   cardTitle: { fontSize: 14, fontWeight: "500", color: "#292524" },
-  chartContainer: { flexDirection: "row", alignItems: "flex-end", height: 112, gap: 8, marginTop: 16 },
-  chartColumn: { flex: 1, alignItems: "center", gap: 4 },
+  chartContainer: { flexDirection: "row", alignItems: "flex-end", height: 112, marginTop: 16 },
+  chartColumn: { flex: 1, alignItems: "center" },
   chartValue: { fontSize: 10, color: "#a8a29e" },
   barWrapper: { width: "100%", height: 80, justifyContent: "flex-end" },
   bar: { width: "100%", borderRadius: 6 },
@@ -737,7 +737,7 @@ const styles = StyleSheet.create({
   chartLabel: { fontSize: 11, color: "#a8a29e" },
   chartLabelToday: { color: "#1c1917", fontWeight: "bold" },
   dividerRow: { borderTopWidth: 1, borderTopColor: "#f5f5f4", paddingTop: 12, marginTop: 16, flexDirection: "row", justifyContent: "space-between" },
-  trendBox: { backgroundColor: "#fffbeb", borderWidth: 1, borderColor: "#fde68a", borderRadius: 16, padding: 16, marginBottom: 16, flexDirection: "row", gap: 12 },
+  trendBox: { backgroundColor: "#fffbeb", borderWidth: 1, borderColor: "#fde68a", borderRadius: 16, padding: 16, marginBottom: 16, flexDirection: "row" },
   trendText: { flex: 1, fontSize: 12, color: "#92400e", lineHeight: 18 },
   accordionHeader: { flexDirection: "row", justifyContent: "space-between", alignItems: "center", padding: 16 },
   accordionBody: { paddingHorizontal: 16, paddingBottom: 16, borderTopWidth: 1, borderTopColor: "#f5f5f4" },
@@ -747,7 +747,7 @@ const styles = StyleSheet.create({
   segmentText: { fontSize: 12, color: "#78716c" },
   segmentTextActive: { color: "#1c1917", fontWeight: "600" },
   calNavTitle: { fontSize: 12, fontWeight: "500", color: "#44403c" },
-  grid5: { flexDirection: "row", flexWrap: "wrap", gap: 6, marginTop: 12 },
+  grid5: { flexDirection: "row", flexWrap: "wrap", marginTop: 12 },
   grid7: { flexDirection: "row", flexWrap: "wrap", width: "100%", marginTop: 12 },
   gridHeader: { width: `${100 / 7}%`, textAlign: "center", fontSize: 10, color: "#a8a29e", marginBottom: 4 },
   dayChip: { width: `${100 / 7 - 2}%`, aspectRatio: 1, borderRadius: 8, justifyContent: "center", alignItems: "center", margin: "1%" },
@@ -763,7 +763,7 @@ const styles = StyleSheet.create({
   btnSmallRoundBlue: { width: 24, height: 24, borderRadius: 12, backgroundColor: "#3b82f6", justifyContent: "center", alignItems: "center" },
   btnSmallText: { color: "#44403c", fontWeight: "bold" },
   btnSmallTextWhite: { color: "#ffffff", fontWeight: "bold" },
-  settingsGroup: { gap: 12, marginBottom: 24 },
+  settingsGroup: { marginBottom: 24 },
   settingText: { fontSize: 14, color: "#44403c" },
   boldText: { fontWeight: "bold", color: "#1c1917" },
   doneText: { fontSize: 12, color: "#3b82f6", fontWeight: "600" },

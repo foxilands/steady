@@ -26,6 +26,21 @@ import {
 } from "lucide-react-native";
 
 const mxn = new Intl.NumberFormat("es-MX", { style: "currency", currency: "MXN" });
+const C = {
+  bg: "#141413",
+  card: "#1f1e1c",
+  chip: "#232320",
+  chipLogged: "#1c2b2c",
+  border: "#2b2a28",
+  text: "#f7f5ec",
+  textDim: "#b0aea5",
+  textFaint: "#7f7b70",
+  accent: "#22b8cf",
+  accentDim: "#8be9ef",
+  amber: "#e8a33d",
+  amberBg: "#2f2415",
+  amberBorder: "#4a3820",
+};
 const statusBarInset = Platform.OS === "android" ? (StatusBar.currentHeight ?? 0) : 0;
 
 const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
@@ -336,7 +351,7 @@ export default function App() {
 
   return (
     <SafeAreaView style={styles.safeArea}>
-      <StatusBar barStyle="dark-content" backgroundColor="#fafaf9" />
+      <StatusBar barStyle="light-content" backgroundColor={C.bg} />
       <ScrollView contentContainerStyle={styles.container}>
         {/* Header */}
         <View style={styles.header}>
@@ -599,19 +614,20 @@ export default function App() {
                 </TouchableOpacity>
               </View>
             ) : (
-              <View style={styles.rowBetween}>
+              <View>
                 <Text style={styles.subtext}>Daily limit:</Text>
-                <View style={styles.rowGap}>
-                  <TextInput
-                    keyboardType="numeric"
-                    value={String(limit)}
-                    onChangeText={saveLimit}
-                    style={styles.inputStyle}
-                  />
-                  <TouchableOpacity onPress={() => setShowLimitEdit(false)}>
-                    <Text style={styles.doneText}>Done</Text>
+                <View style={styles.editRow}>
+                  <TouchableOpacity style={styles.btnSmallRound} onPress={() => saveLimit(limit - 1)}>
+                    <Text style={styles.btnSmallText}>−</Text>
+                  </TouchableOpacity>
+                  <Text style={styles.editValue}>{limit}</Text>
+                  <TouchableOpacity style={styles.btnSmallRoundBlue} onPress={() => saveLimit(limit + 1)}>
+                    <Text style={styles.btnSmallTextWhite}>+</Text>
                   </TouchableOpacity>
                 </View>
+                <TouchableOpacity onPress={() => setShowLimitEdit(false)} style={{ alignItems: "flex-end", marginTop: 12 }}>
+                  <Text style={styles.doneText}>Done</Text>
+                </TouchableOpacity>
               </View>
             )}
           </View>
@@ -658,7 +674,7 @@ export default function App() {
             {!showTimerEdit ? (
               <View style={styles.rowBetween}>
                 <View style={styles.rowGap}>
-                  <TimerIcon size={14} color="#a8a29e" />
+                  <TimerIcon size={14} color={C.textDim} />
                   <Text style={styles.settingText}>
                     Timer flags at <Text style={styles.boldText}>{timerLimit} min</Text>
                   </Text>
@@ -668,19 +684,26 @@ export default function App() {
                 </TouchableOpacity>
               </View>
             ) : (
-              <View style={styles.rowBetween}>
-                <Text style={styles.subtext}>Timer alert (min):</Text>
-                <View style={styles.rowGap}>
-                  <TextInput
-                    keyboardType="numeric"
-                    value={String(timerLimit)}
-                    onChangeText={saveTimerLimit}
-                    style={styles.inputStyle}
-                  />
-                  <TouchableOpacity onPress={() => setShowTimerEdit(false)}>
-                    <Text style={styles.doneText}>Done</Text>
+              <View>
+                <Text style={styles.subtext}>How long before it flags?</Text>
+                <View style={styles.editRow}> 
+                  <TouchableOpacity
+                    style={styles.btnSmallRound}
+                    onPress={() => saveTimerLimit(timerLimit - 5)}
+                  >
+                    <Text style={styles.btnSmallText}>−</Text>
+                  </TouchableOpacity>
+                  <Text style={styles.editValue}>{timerLimit} min</Text>
+                  <TouchableOpacity
+                    style={styles.btnSmallRoundBlue}
+                    onPress={() => saveTimerLimit(timerLimit + 5)}
+                  >
+                    <Text style={styles.btnSmallTextWhite}>+</Text>
                   </TouchableOpacity>
                 </View>
+                <TouchableOpacity onPress={() => setShowTimerEdit(false)} style={{ alignItems: "flex-end", marginTop: 12 }}>
+                  <Text style={styles.doneText}>Done</Text>
+                </TouchableOpacity>
               </View>
             )}
           </View>
@@ -695,79 +718,81 @@ export default function App() {
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: "#fafaf9",
+    backgroundColor: C.bg,
     paddingTop: statusBarInset + 16,
   },
-  container: { paddingHorizontal: 16, paddingBottom: 24, maxWidth: 400, alignSelf: "center", width: "100%" },
-  centerContainer: { flex: 1, justifyContent: "center", alignItems: "center", backgroundColor: "#fafaf9" },
-  loadingText: { color: "#a8a29e", fontSize: 14 },
-  header: { marginBottom: 20 },
-  headerSubtitle: { color: "#60a5fa", fontSize: 12, fontWeight: "600", textTransform: "uppercase" },
-  headerTitle: { fontSize: 24, fontWeight: "bold", color: "#1c1917" },
-  card: { borderRadius: 16, padding: 16, marginBottom: 16, borderWidth: 1, borderColor: "#e7e5e4" },
-  cardWhite: { backgroundColor: "#ffffff" },
-  cardTimerOver: { backgroundColor: "#fef3c7", borderColor: "#f59e0b" },
-  cardTimerNear: { backgroundColor: "#fffbeb", borderColor: "#fcd34d" },
-  cardOver: { backgroundColor: "#fffbeb", borderColor: "#fcd34d" },
-  cardAtLimit: { backgroundColor: "#f5f5f4", borderColor: "#d6d3d1" },
+  container: { paddingHorizontal: 18, paddingBottom: 24, maxWidth: 420, alignSelf: "center", width: "100%" },
+  centerContainer: { flex: 1, justifyContent: "center", alignItems: "center", backgroundColor: C.bg },
+  loadingText: { color: C.textDim, fontSize: 14 },
+  header: { marginBottom: 24 },
+  headerSubtitle: { color: C.accentDim, fontSize: 11, fontWeight: "600", textTransform: "uppercase", letterSpacing: 1.2, marginBottom: 4 },
+  headerTitle: { fontSize: 28, fontWeight: "700", color: C.text, lineHeight: 34 },
+  card: { backgroundColor: C.card, borderRadius: 20, padding: 18, marginBottom: 16, borderWidth: 1, borderColor: C.border },
+  cardWhite: { backgroundColor: C.card },
+  cardTimerOver: { backgroundColor: C.amberBg, borderColor: C.amberBorder },
+  cardTimerNear: { backgroundColor: C.amberBg, borderColor: C.amberBorder },
+  cardOver: { backgroundColor: C.amberBg, borderColor: C.amberBorder },
+  cardAtLimit: { backgroundColor: C.chip, borderColor: C.border },
   rowBetween: { flexDirection: "row", justifyContent: "space-between", alignItems: "center" },
-  rowGap: { flexDirection: "row", alignItems: "center" },
-  rowCenterGap: { flexDirection: "row", justifyContent: "center", alignItems: "center", marginTop: 12 },
+  rowGap: { flexDirection: "row", alignItems: "center", gap: 10 },
+  rowCenterGap: { flexDirection: "row", justifyContent: "center", alignItems: "center", marginTop: 12, gap: 8 },
   alignCenter: { alignItems: "center" },
-  subtext: { fontSize: 12, color: "#78716c" },
-  subtextSmall: { fontSize: 11, color: "#a8a29e" },
-  linkText: { fontSize: 12, color: "#a8a29e" },
-  btnPrimary: { backgroundColor: "#3b82f6", borderRadius: 20, paddingHorizontal: 16, paddingVertical: 8 },
-  btnPrimaryText: { color: "#ffffff", fontSize: 12, fontWeight: "600" },
-  btnSecondary: { backgroundColor: "#f5f5f4", borderRadius: 20, paddingHorizontal: 16, paddingVertical: 8, flexDirection: "row", alignItems: "center" },
-  btnSecondaryText: { color: "#44403c", fontSize: 12, fontWeight: "600" },
-  timerDigits: { fontSize: 32, fontWeight: "600", color: "#292524" },
-  counterNumber: { fontSize: 60, fontWeight: "300", color: "#1c1917" },
-  btnRoundPrimary: { width: 48, height: 48, borderRadius: 24, backgroundColor: "#3b82f6", justifyContent: "center", alignItems: "center" },
-  btnRoundSecondary: { width: 48, height: 48, borderRadius: 24, backgroundColor: "#f5f5f4", justifyContent: "center", alignItems: "center" },
-  warningText: { fontSize: 12, color: "#b45309", textAlign: "center", marginTop: 12 },
-  cardTitle: { fontSize: 14, fontWeight: "500", color: "#292524" },
-  chartContainer: { flexDirection: "row", alignItems: "flex-end", height: 112, marginTop: 16 },
+  subtext: { fontSize: 12, color: C.textDim },
+  subtextSmall: { fontSize: 11, color: C.textFaint },
+  linkText: { fontSize: 12, color: C.accentDim },
+  btnPrimary: { backgroundColor: C.accent, borderRadius: 24, paddingHorizontal: 16, paddingVertical: 10 },
+  btnPrimaryText: { color: C.bg, fontSize: 12, fontWeight: "700" },
+  btnSecondary: { backgroundColor: C.chip, borderRadius: 24, paddingHorizontal: 16, paddingVertical: 10, flexDirection: "row", alignItems: "center", gap: 8 },
+  btnSecondaryText: { color: C.textDim, fontSize: 12, fontWeight: "600" },
+  timerDigits: { fontSize: 34, fontWeight: "700", color: C.text },
+  counterNumber: { fontSize: 60, fontWeight: "700", color: C.text },
+  btnRoundPrimary: { width: 50, height: 50, borderRadius: 25, backgroundColor: C.accent, justifyContent: "center", alignItems: "center" },
+  btnRoundSecondary: { width: 50, height: 50, borderRadius: 25, backgroundColor: C.chip, justifyContent: "center", alignItems: "center" },
+  warningText: { fontSize: 12, color: C.amber, textAlign: "center", marginTop: 12 },
+  cardTitle: { fontSize: 15, fontWeight: "600", color: C.text },
+  chartContainer: { flexDirection: "row", alignItems: "flex-end", height: 112, marginTop: 18 },
   chartColumn: { flex: 1, alignItems: "center" },
-  chartValue: { fontSize: 10, color: "#a8a29e" },
-  barWrapper: { width: "100%", height: 80, justifyContent: "flex-end" },
-  bar: { width: "100%", borderRadius: 6 },
-  barDefault: { backgroundColor: "#e7e5e4" },
-  barToday: { backgroundColor: "#60a5fa" },
-  barOver: { backgroundColor: "#fbbf24" },
-  chartLabel: { fontSize: 11, color: "#a8a29e" },
-  chartLabelToday: { color: "#1c1917", fontWeight: "bold" },
-  dividerRow: { borderTopWidth: 1, borderTopColor: "#f5f5f4", paddingTop: 12, marginTop: 16, flexDirection: "row", justifyContent: "space-between" },
-  trendBox: { backgroundColor: "#fffbeb", borderWidth: 1, borderColor: "#fde68a", borderRadius: 16, padding: 16, marginBottom: 16, flexDirection: "row" },
-  trendText: { flex: 1, fontSize: 12, color: "#92400e", lineHeight: 18 },
-  accordionHeader: { flexDirection: "row", justifyContent: "space-between", alignItems: "center", padding: 16 },
-  accordionBody: { paddingHorizontal: 16, paddingBottom: 16, borderTopWidth: 1, borderTopColor: "#f5f5f4" },
-  segmentedControl: { flexDirection: "row", backgroundColor: "#f5f5f4", padding: 2, borderRadius: 8 },
-  segmentBtn: { paddingHorizontal: 10, paddingVertical: 4, borderRadius: 6 },
-  segmentBtnActive: { backgroundColor: "#ffffff" },
-  segmentText: { fontSize: 12, color: "#78716c" },
-  segmentTextActive: { color: "#1c1917", fontWeight: "600" },
-  calNavTitle: { fontSize: 12, fontWeight: "500", color: "#44403c" },
+  chartValue: { fontSize: 10, color: C.textDim },
+  barWrapper: { width: "100%", height: 84, justifyContent: "flex-end" },
+  bar: { width: "100%", borderRadius: 8 },
+  barDefault: { backgroundColor: C.chip },
+  barToday: { backgroundColor: C.accent },
+  barOver: { backgroundColor: C.amber },
+  chartLabel: { fontSize: 11, color: C.textFaint, marginTop: 6 },
+  chartLabelToday: { color: C.text, fontWeight: "700" },
+  dividerRow: { borderTopWidth: 1, borderTopColor: C.border, paddingTop: 14, marginTop: 18, flexDirection: "row", justifyContent: "space-between" },
+  trendBox: { backgroundColor: C.amberBg, borderWidth: 1, borderColor: C.amberBorder, borderRadius: 18, padding: 16, marginBottom: 16, flexDirection: "row", gap: 10 },
+  trendText: { flex: 1, fontSize: 12, color: C.amber, lineHeight: 18 },
+  accordionHeader: { flexDirection: "row", justifyContent: "space-between", alignItems: "center", padding: 18 },
+  accordionBody: { paddingHorizontal: 18, paddingBottom: 18, borderTopWidth: 1, borderTopColor: C.border },
+  segmentedControl: { flexDirection: "row", backgroundColor: C.chip, padding: 4, borderRadius: 12 },
+  segmentBtn: { paddingHorizontal: 12, paddingVertical: 6, borderRadius: 10 },
+  segmentBtnActive: { backgroundColor: C.accent },
+  segmentText: { fontSize: 12, color: C.textDim },
+  segmentTextActive: { color: C.bg, fontWeight: "700" },
+  calNavTitle: { fontSize: 13, fontWeight: "600", color: C.text },
   grid5: { flexDirection: "row", flexWrap: "wrap", marginTop: 12 },
   grid7: { flexDirection: "row", flexWrap: "wrap", width: "100%", marginTop: 12 },
-  gridHeader: { width: `${100 / 7}%`, textAlign: "center", fontSize: 10, color: "#a8a29e", marginBottom: 4 },
-  dayChip: { width: `${100 / 7 - 2}%`, aspectRatio: 1, borderRadius: 8, justifyContent: "center", alignItems: "center", margin: "1%" },
-  chipDefault: { backgroundColor: "#fafaf9" },
-  chipLogged: { backgroundColor: "#eff6ff" },
-  chipOver: { backgroundColor: "#fbbf24" },
-  chipToday: { borderWidth: 2, borderColor: "#93c5fd" },
-  chipSelected: { borderWidth: 2, borderColor: "#a8a29e" },
-  dayChipText: { fontSize: 12, fontWeight: "500", color: "#d6d3d1" },
-  dayChipCount: { fontSize: 9, opacity: 0.8 },
-  selectedDayBar: { flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginTop: 12, paddingTop: 12, borderTopWidth: 1, borderTopColor: "#f5f5f4" },
-  btnSmallRound: { width: 24, height: 24, borderRadius: 12, backgroundColor: "#f5f5f4", justifyContent: "center", alignItems: "center" },
-  btnSmallRoundBlue: { width: 24, height: 24, borderRadius: 12, backgroundColor: "#3b82f6", justifyContent: "center", alignItems: "center" },
-  btnSmallText: { color: "#44403c", fontWeight: "bold" },
-  btnSmallTextWhite: { color: "#ffffff", fontWeight: "bold" },
+  gridHeader: { width: `${100 / 7}%`, textAlign: "center", fontSize: 10, color: C.textDim, marginBottom: 6 },
+  dayChip: { width: `${100 / 7 - 2}%`, aspectRatio: 1, borderRadius: 12, justifyContent: "center", alignItems: "center", margin: "1%", backgroundColor: C.chip },
+  chipDefault: { backgroundColor: C.chip },
+  chipLogged: { backgroundColor: C.chipLogged },
+  chipOver: { backgroundColor: C.amber },
+  chipToday: { borderWidth: 2, borderColor: C.accent },
+  chipSelected: { borderWidth: 2, borderColor: C.accentDim },
+  dayChipText: { fontSize: 12, fontWeight: "700", color: C.text },
+  dayChipCount: { fontSize: 9, color: C.textDim, marginTop: 2 },
+  selectedDayBar: { flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginTop: 14, paddingTop: 14, borderTopWidth: 1, borderTopColor: C.border },
+  btnSmallRound: { width: 28, height: 28, borderRadius: 14, backgroundColor: C.chip, justifyContent: "center", alignItems: "center" },
+  btnSmallRoundBlue: { width: 28, height: 28, borderRadius: 14, backgroundColor: C.accent, justifyContent: "center", alignItems: "center" },
+  btnSmallText: { color: C.text, fontWeight: "700" },
+  btnSmallTextWhite: { color: C.bg, fontWeight: "700" },
+  editRow: { flexDirection: "row", alignItems: "center", justifyContent: "center", gap: 16, marginTop: 12 },
+  editValue: { color: C.text, fontSize: 16, fontWeight: "700", minWidth: 72, textAlign: "center" },
   settingsGroup: { marginBottom: 24 },
-  settingText: { fontSize: 14, color: "#44403c" },
-  boldText: { fontWeight: "bold", color: "#1c1917" },
-  doneText: { fontSize: 12, color: "#3b82f6", fontWeight: "600" },
-  inputStyle: { borderWidth: 1, borderColor: "#e7e5e4", borderRadius: 6, paddingHorizontal: 8, paddingVertical: 4, textAlign: "center", width: 60, fontSize: 12 },
-  footerText: { textAlign: "center", fontSize: 11, color: "#a8a29e" },
+  settingText: { fontSize: 14, color: C.text },
+  boldText: { fontWeight: "700", color: C.text },
+  doneText: { fontSize: 12, color: C.accentDim, fontWeight: "600" },
+  inputStyle: { backgroundColor: C.chip, borderWidth: 1, borderColor: C.border, borderRadius: 10, paddingHorizontal: 10, paddingVertical: 8, textAlign: "center", width: 68, fontSize: 13, color: C.text },
+  footerText: { textAlign: "center", fontSize: 11, color: C.textDim, marginTop: 8 },
 });

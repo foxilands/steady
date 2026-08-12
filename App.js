@@ -26,6 +26,7 @@ import {
 } from "lucide-react-native";
 
 const mxn = new Intl.NumberFormat("es-MX", { style: "currency", currency: "MXN" });
+const statusBarInset = Platform.OS === "android" ? (StatusBar.currentHeight ?? 0) : 0;
 
 const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
 

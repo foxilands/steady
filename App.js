@@ -9,8 +9,12 @@ import {
   SafeAreaView,
   StatusBar,
   Platform,
+  AppState,
+  Keyboard,
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import * as Notifications from "expo-notifications";
+import * as Haptics from "expo-haptics";
 import {
   Plus,
   Minus,
@@ -24,6 +28,15 @@ import {
   ChevronLeft,
   ChevronRight,
 } from "lucide-react-native";
+
+// Configure notification behavior
+Notifications.setNotificationHandler({
+  handleNotification: async () => ({
+    shouldShowAlert: true,
+    shouldPlaySound: true,
+    shouldSetBadge: false,
+  }),
+});
 
 const mxn = new Intl.NumberFormat("es-MX", { style: "currency", currency: "MXN" });
 const C = {
@@ -45,6 +58,13 @@ const statusBarInset = Platform.OS === "android" ? (StatusBar.currentHeight ?? 0
 
 const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
 
+// Safe haptic feedback helper
+const triggerHaptic = () => {
+  try {
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+  } catch (e) {}
+};
+
 const parseIntValue = (rawValue, fallback, min, max) => {
   const parsed = Number.parseInt(rawValue, 10);
   if (!Number.isFinite(parsed)) return fallback;
@@ -63,8 +83,12 @@ function dateKey(d = new Date()) {
 
 function formatElapsed(ms) {
   const totalSec = Math.max(0, Math.floor(ms / 1000));
-  const m = Math.floor(totalSec / 60);
+  const h = Math.floor(totalSec / 3600);
+  const m = Math.floor((totalSec % 3600) / 60);
   const s = totalSec % 60;
+  if (h > 0) {
+    return `${h}:${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
+  }
   return `${m}:${String(s).padStart(2, "0")}`;
 }
 
@@ -151,7 +175,10 @@ function DayChip({ day, count, logged, limit, isToday, selected, onClick }) {
   const over = count > limit;
   return (
     <TouchableOpacity
-      onPress={onClick}
+      onPress={() => {
+        triggerHaptic();
+        onClick();
+      }}
       style={[
         styles.dayChip,
         over ? styles.chipOver : logged ? styles.chipLogged : styles.chipDefault,
@@ -196,6 +223,35 @@ export default function App() {
 
   const key = dateKey();
   const days = last7Days();
+
+  useEffect(() => {
+    async function requestPermissions() {
+      try {
+        if (Platform.OS === "android") {
+          await Notifications.setNotificationChannelAsync("default", {
+            name: "Default Notifications",
+            importance: Notifications.AndroidImportance.MAX,
+            vibrationPattern: [0, 250, 250, 250],
+            lightColor: "#22b8cf",
+          });
+        }
+        const { status } = await Notifications.getPermissionsAsync();
+        if (status !== "granted") {
+          await Notifications.requestPermissionsAsync();
+        }
+      } catch (e) {}
+    }
+    requestPermissions();
+  }, []);
+
+  useEffect(() => {
+    const subscription = AppState.addEventListener("change", (nextAppState) => {
+      if (nextAppState === "active") {
+        setNow(Date.now());
+      }
+    });
+    return () => subscription.remove();
+  }, []);
 
   useEffect(() => {
     if (timerStart) {
@@ -296,6 +352,7 @@ export default function App() {
   const adjust = (delta) => adjustDay(key, delta);
 
   const startTimer = async (alsoLog) => {
+    triggerHaptic();
     const start = Date.now();
     setTimerStart(start);
     setNow(start);
@@ -303,12 +360,28 @@ export default function App() {
       await AsyncStorage.setItem("pouch-timer-start", String(start));
     } catch (e) {}
     if (alsoLog) adjust(1);
+
+    try {
+      await Notifications.cancelAllScheduledNotificationsAsync();
+      await Notifications.scheduleNotificationAsync({
+        content: {
+          title: "Time is up!",
+          body: `It has been ${timerLimit} minutes. Time to take it out.`,
+        },
+        trigger: { seconds: timerLimit * 60 },
+      });
+    } catch (e) {}
   };
 
   const stopTimer = async () => {
+    triggerHaptic();
     setTimerStart(null);
     try {
       await AsyncStorage.removeItem("pouch-timer-start");
+    } catch (e) {}
+
+    try {
+      await Notifications.cancelAllScheduledNotificationsAsync();
     } catch (e) {}
   };
 
@@ -665,7 +738,14 @@ export default function App() {
                     style={styles.inputStyle}
                   />
                 </View>
-                <TouchableOpacity accessibilityLabel="Save price and size settings" onPress={() => setShowCostEdit(false)} style={{ alignItems: "flex-end" }}>
+                <TouchableOpacity
+                  accessibilityLabel="Save price and size settings"
+                  onPress={() => {
+                    Keyboard.dismiss();
+                    setShowCostEdit(false);
+                  }}
+                  style={{ alignItems: "flex-end" }}
+                >
                   <Text style={styles.doneText}>Done</Text>
                 </TouchableOpacity>
               </View>
@@ -705,7 +785,14 @@ export default function App() {
                     <Text style={styles.btnSmallTextWhite}>+</Text>
                   </TouchableOpacity>
                 </View>
-                <TouchableOpacity accessibilityLabel="Save timer settings" onPress={() => setShowTimerEdit(false)} style={{ alignItems: "flex-end", marginTop: 12 }}>
+                <TouchableOpacity
+                  accessibilityLabel="Save timer settings"
+                  onPress={() => {
+                    Keyboard.dismiss();
+                    setShowTimerEdit(false);
+                  }}
+                  style={{ alignItems: "flex-end", marginTop: 12 }}
+                >
                   <Text style={styles.doneText}>Done</Text>
                 </TouchableOpacity>
               </View>

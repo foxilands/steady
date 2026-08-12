@@ -22,9 +22,9 @@
     "description": "Steady is a simple daily pouch tracker for staying aware of your limit, spending, and timer habits.",
     "extra": {
       "eas": {
-        "projectId": "d91700a7-1102-4498-9599-23682f9bd435"
+        "projectId": "929ed7d2-2bb5-4a50-b711-ec486cd0d67b"
       }
-    }
+    },
+    "owner": "foxilandss-team"
   }
 }
-

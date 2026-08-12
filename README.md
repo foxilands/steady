@@ -60,6 +60,26 @@ The project is configured for Expo EAS builds. The current preview app profile i
 
 This repo is the public project source for Steady and is synced with the build-ready version of the app.
 
+## v1 Changelog
+
+### Added
+- daily pouch tracking and limit comparison
+- cost estimation based on can size and price
+- timer tracking for in-use reminder workflow
+- last 7 day summary and calendar-based history
+- local-only persistence with AsyncStorage
+
+### Improved
+- cleaned up the Android startup render flow for stability
+- removed incompatible layout assumptions affecting app launch
+- fixed missing Expo native dependency issues during runtime
+- aligned the Expo app configuration for a stable preview build
+
+### Fixed
+- runtime crash caused by missing ExpoAsset module
+- startup reference error caused by stale statusBarInset usage
+- Android build compatibility issues affecting app launch
+
 ## Release Checklist
 
 - [x] app configured for Expo/EAS
